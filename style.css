@@ -1,53 +1,28 @@
-/* Basic styling for layout and buttons */
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: #f4f4f4;
 }
 
 h1, h2 {
-    color: #333;
-}
-
-section {
-    margin-bottom: 20px;
-}
-
-input, select, button {
-    padding: 10px;
-    font-size: 16px;
-    margin-right: 10px;
+    font-weight: bold;
 }
 
 button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-#buttonsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.buttonItem {
-    background-color: #2196f3;
-    color: white;
-    padding: 15px;
-    text-align: center;
-    border-radius: 5px;
-    font-weight: bold;
+    padding: 8px 12px;
+    margin: 5px;
     cursor: pointer;
 }
 
-.buttonItem:hover {
-    background-color: #1976d2;
+input {
+    padding: 8px;
+    margin: 5px;
+}
+
+#buttonContainer {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 8px;
+    margin-bottom: 20px;
 }
