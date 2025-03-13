@@ -1,54 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Button Manager</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Manager</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Button Picker -->
-        <label for="buttonPicker" class="label">Select a button to edit:</label>
-        <select id="buttonPicker" class="dropdown">
-            <option value="default">Select a button to edit</option>
-            <option value="button1">Button 1 (10)</option>
-            <option value="button2">Button 2 (8)</option>
-            <option value="button3">Button 3 (9)</option>
-        </select>
 
-        <!-- Create New Button Section -->
-        <div id="createButtonSection" class="card">
-            <h2>Create New Button</h2>
-            <div class="input-group">
-                <label>Enter word</label>
-                <input type="text" id="newButtonWord" placeholder="Enter word">
-            </div>
-            <div class="input-group">
-                <label>Enter number</label>
-                <input type="number" id="newButtonNumber" placeholder="0">
-            </div>
-            <button id="createButton" class="btn create-btn">Create Button</button>
-        </div>
+  <h2>Total Count: <span id="totalCount">0</span></h2>
 
-        <!-- Edit Button Section -->
-        <div id="editButtonSection" class="card" style="display: none;">
-            <h2>Edit Button</h2>
-            <div class="input-group">
-                <label>Edit word</label>
-                <input type="text" id="editButtonWord">
-            </div>
-            <div class="input-group">
-                <label>Edit number</label>
-                <input type="number" id="editButtonNumber">
-            </div>
-            <div class="button-group">
-                <button id="updateButton" class="btn update-btn">Update Button</button>
-                <button id="cancelEditButton" class="btn cancel-btn">Cancel</button>
-            </div>
-        </div>
-    </div>
+  <div id="buttonContainer" class="button-grid"></div>
 
-    <script src="script.js"></script>
+  <label for="buttonSelect">Edit a button:</label>
+  <select id="buttonSelect"></select>
+
+  <!-- Create New Button -->
+  <form id="createForm">
+    <h3>Create New Button</h3>
+    <input type="text" id="newWord" placeholder="Enter word" required>
+    <input type="number" id="newCount" value="0" required>
+    <button type="submit">Create Button</button>
+  </form>
+
+  <!-- Edit Button -->
+  <form id="editForm" style="display: none;">
+    <h3>Edit Button</h3>
+    <input type="text" id="editWord" required>
+    <input type="number" id="editCount" required>
+    <button type="submit">Update Button</button>
+    <button type="button" id="cancelEdit">Cancel</button>
+  </form>
+
+  <script src="script.js"></script>
 </body>
 </html>
