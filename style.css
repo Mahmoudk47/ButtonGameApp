@@ -1,5 +1,6 @@
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
@@ -9,69 +10,103 @@ body {
 }
 
 .container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     width: 400px;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    text-align: center;
+.label {
+    font-size: 1rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
-p {
-    font-size: 18px;
-    text-align: center;
-}
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.game-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 16px;
+.dropdown {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
+    margin-bottom: 1.5rem;
 }
 
-.game-button:hover {
-    transform: scale(1.05);
+/* Card Styling */
+.card {
+    background: #fff;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
 }
 
-.editor {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-label {
+/* Inputs */
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
     font-weight: bold;
 }
 
-input {
-    padding: 10px;
-    font-size: 14px;
+.input-group input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-#updateButton {
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
+/* Buttons */
+.btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
     cursor: pointer;
+    margin-right: 0.5rem;
+    transition: 0.3s ease;
 }
 
-#updateButton:hover {
+.create-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.create-btn:hover {
     background-color: #218838;
+}
+
+.update-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #0056b3;
+}
+
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
 }
