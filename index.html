@@ -7,33 +7,37 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Total Count: <span id="totalCount">0</span></h1>
+    <div class="container">
+        <h1>Total Count: <span id="totalCount">0</span></h1>
 
-    <!-- Display existing buttons -->
-    <div id="buttonContainer"></div>
+        <!-- Button Display -->
+        <div id="buttonContainer" class="button-grid"></div>
 
-    <h2>Edit a button:</h2>
-    <select id="editButtonSelect">
-        <option>Select a button to edit</option>
-    </select>
+        <!-- Edit Button Section -->
+        <h2>Edit a button:</h2>
+        <select id="editButtonSelect">
+            <option value="">Select a button to edit</option>
+        </select>
 
-    <div id="formContainer">
-        <!-- Create new button form -->
-        <div id="createButtonForm">
-            <h2>Create New Button</h2>
-            <input type="text" id="newButtonWord" placeholder="Enter word">
-            <input type="number" id="newButtonCount" value="0">
-            <button id="createButton">Create Button</button>
-        </div>
+        <!-- Forms -->
+        <div id="formContainer">
+            <!-- Create New Button Form -->
+            <div id="createButtonForm" class="form">
+                <h2>Create New Button</h2>
+                <label>Word: <input type="text" id="newButtonWord" placeholder="Enter word"></label>
+                <label>Count: <input type="number" id="newButtonCount" value="0" min="0"></label>
+                <button id="createButton">Create Button</button>
+            </div>
 
-        <!-- Edit button form (hidden initially) -->
-        <div id="editButtonForm" style="display: none;">
-            <h2>Edit Button</h2>
-            <input type="text" id="editButtonWord">
-            <input type="number" id="editButtonCount">
-            <button id="updateButton">Update Button</button>
-            <button id="deleteButton" style="background-color: red; color: white;">Delete</button>
-            <button id="cancelEditButton">Cancel</button>
+            <!-- Edit Button Form -->
+            <div id="editButtonForm" class="form hidden">
+                <h2>Edit Button</h2>
+                <label>Word: <input type="text" id="editButtonWord"></label>
+                <label>Count: <input type="number" id="editButtonCount"></label>
+                <button id="updateButton">Update</button>
+                <button id="deleteButton" class="delete">Delete</button>
+                <button id="cancelEditButton" class="cancel">Cancel</button>
+            </div>
         </div>
     </div>
 
