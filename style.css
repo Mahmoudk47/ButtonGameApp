@@ -1,28 +1,83 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2 {
-    font-weight: bold;
+    text-align: center;
+}
+
+#totalCount {
+    color: #0073e6;
+}
+
+.button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 button {
-    padding: 8px 12px;
-    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    background-color: #0073e6;
+    color: white;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+.form {
+    background: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
 }
 
 input {
     padding: 8px;
-    margin: 5px;
+    width: 100%;
+    margin-top: 5px;
 }
 
-#buttonContainer {
-    margin-bottom: 20px;
+.hidden {
+    display: none;
 }
 
-select {
-    padding: 8px;
-    margin-bottom: 20px;
+.delete {
+    background-color: #ff4d4d;
+}
+
+.delete:hover {
+    background-color: #cc0000;
+}
+
+.cancel {
+    background-color: #777;
+}
+
+.cancel:hover {
+    background-color: #555;
 }
