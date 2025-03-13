@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Manager</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Total Count: <span id="totalCount">0</span></h1>
 
-    <!-- Section to select and edit buttons -->
-    <h2>Edit a button:</h2>
-    <select id="editButtonSelect">
-        <option value="">Select a button to edit</option>
-    </select>
+    <!-- Edit Button Section -->
+    <section>
+        <h2>Edit a button:</h2>
+        <select id="editButtonSelect">
+            <option value="" disabled selected>Select a button to edit</option>
+        </select>
+    </section>
 
-    <!-- Create new buttons -->
-    <h2>Create New Button</h2>
-    <input type="text" id="buttonWord" placeholder="Enter word">
-    <input type="number" id="buttonCount" value="0" min="0">
-    <button id="createButton">Create Button</button>
+    <!-- Create New Button Section -->
+    <section>
+        <h2>Create New Button</h2>
+        <input type="text" id="buttonText" placeholder="Enter word">
+        <input type="number" id="buttonCount" value="0" min="0">
+        <button id="createButton">Create Button</button>
+    </section>
 
-    <!-- Container for buttons -->
-    <div id="buttonContainer"></div>
+    <!-- Buttons Display Area -->
+    <section id="buttonsContainer"></section>
 
     <script src="script.js"></script>
 </body>
