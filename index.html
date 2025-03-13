@@ -4,29 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Manager</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Total Count: <span id="totalCount">0</span></h1>
 
-    <!-- Edit Button Section -->
-    <section>
-        <h2>Edit a button:</h2>
-        <select id="editButtonSelect">
-            <option value="" disabled selected>Select a button to edit</option>
-        </select>
-    </section>
+    <!-- Display existing buttons -->
+    <div id="buttonContainer"></div>
 
-    <!-- Create New Button Section -->
-    <section>
-        <h2>Create New Button</h2>
-        <input type="text" id="buttonText" placeholder="Enter word">
-        <input type="number" id="buttonCount" value="0" min="0">
-        <button id="createButton">Create Button</button>
-    </section>
+    <h2>Edit a button:</h2>
+    <select id="editButtonSelect">
+        <option>Select a button to edit</option>
+    </select>
 
-    <!-- Buttons Display Area -->
-    <section id="buttonsContainer"></section>
+    <div id="formContainer">
+        <!-- Create new button form -->
+        <div id="createButtonForm">
+            <h2>Create New Button</h2>
+            <input type="text" id="newButtonWord" placeholder="Enter word">
+            <input type="number" id="newButtonCount" value="0">
+            <button id="createButton">Create Button</button>
+        </div>
+
+        <!-- Edit button form (hidden initially) -->
+        <div id="editButtonForm" style="display: none;">
+            <h2>Edit Button</h2>
+            <input type="text" id="editButtonWord">
+            <input type="number" id="editButtonCount">
+            <button id="updateButton">Update Button</button>
+            <button id="deleteButton" style="background-color: red; color: white;">Delete</button>
+            <button id="cancelEditButton">Cancel</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
