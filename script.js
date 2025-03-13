@@ -9,17 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalCount = 0;
     let selectedButtonIndex = null;
 
+    // Update total count
     function updateTotalCount() {
         totalCount = buttons.reduce((sum, button) => sum + button.count, 0);
         totalCountDisplay.textContent = totalCount;
     }
 
+    // Render buttons & dropdown
     function renderButtons() {
         buttonContainer.innerHTML = '';
-        editButtonSelect.innerHTML = '<option>Select a button to edit</option>';
+        editButtonSelect.innerHTML = '<option value="">Select a button to edit</option>';
 
         buttons.forEach((button, index) => {
-            // Render main buttons
+            // Create buttons
             const btn = document.createElement('button');
             btn.textContent = `${button.word} (${button.count})`;
             btn.addEventListener('click', () => {
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             buttonContainer.appendChild(btn);
 
-            // Populate edit dropdown
+            // Add to edit dropdown
             const option = document.createElement('option');
             option.value = index;
             option.textContent = `${button.word} (${button.count})`;
@@ -39,11 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTotalCount();
     }
 
+    // Create new button
     document.getElementById('createButton').addEventListener('click', () => {
-        const word = document.getElementById('newButtonWord').value;
+        const word = document.getElementById('newButtonWord').value.trim();
         const count = parseInt(document.getElementById('newButtonCount').value);
 
-        if (word) {
+        if (word && !isNaN(count)) {
             buttons.push({ word, count });
             renderButtons();
             document.getElementById('newButtonWord').value = '';
@@ -51,22 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Edit button select
     editButtonSelect.addEventListener('change', () => {
         const selectedIndex = editButtonSelect.value;
-        if (selectedIndex !== 'Select a button to edit') {
+        if (selectedIndex !== '') {
             selectedButtonIndex = parseInt(selectedIndex);
             const button = buttons[selectedButtonIndex];
 
             document.getElementById('editButtonWord').value = button.word;
             document.getElementById('editButtonCount').value = button.count;
 
-            createButtonForm.style.display = 'none';
-            editButtonForm.style.display = 'block';
+            createButtonForm.classList.add('hidden');
+            editButtonForm.classList.remove('hidden');
         }
     });
 
+    // Update button
     document.getElementById('updateButton').addEventListener('click', () => {
-        const word = document.getElementById('editButtonWord').value;
+        const word = document.getElementById('editButtonWord').value.trim();
         const count = parseInt(document.getElementById('editButtonCount').value);
 
         if (word && selectedButtonIndex !== null) {
@@ -78,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Delete button
     document.getElementById('deleteButton').addEventListener('click', () => {
         if (selectedButtonIndex !== null) {
             buttons.splice(selectedButtonIndex, 1);
@@ -86,13 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Cancel edit
     document.getElementById('cancelEditButton').addEventListener('click', resetForms);
 
+    // Reset forms
     function resetForms() {
-        createButtonForm.style.display = 'block';
-        editButtonForm.style.display = 'none';
+        createButtonForm.classList.remove('hidden');
+        editButtonForm.classList.add('hidden');
         selectedButtonIndex = null;
-        editButtonSelect.value = 'Select a button to edit';
+        editButtonSelect.value = '';
     }
 
     renderButtons();
