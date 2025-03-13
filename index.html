@@ -1,37 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Button Manager</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Manager</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Total Count: <span id="totalCount">0</span></h1>
 
-  <h2>Total Count: <span id="totalCount">0</span></h2>
+    <!-- Section to select and edit buttons -->
+    <h2>Edit a button:</h2>
+    <select id="editButtonSelect">
+        <option value="">Select a button to edit</option>
+    </select>
 
-  <div id="buttonContainer" class="button-grid"></div>
+    <!-- Create new buttons -->
+    <h2>Create New Button</h2>
+    <input type="text" id="buttonWord" placeholder="Enter word">
+    <input type="number" id="buttonCount" value="0" min="0">
+    <button id="createButton">Create Button</button>
 
-  <label for="buttonSelect">Edit a button:</label>
-  <select id="buttonSelect"></select>
+    <!-- Container for buttons -->
+    <div id="buttonContainer"></div>
 
-  <!-- Create New Button -->
-  <form id="createForm">
-    <h3>Create New Button</h3>
-    <input type="text" id="newWord" placeholder="Enter word" required>
-    <input type="number" id="newCount" value="0" required>
-    <button type="submit">Create Button</button>
-  </form>
-
-  <!-- Edit Button -->
-  <form id="editForm" style="display: none;">
-    <h3>Edit Button</h3>
-    <input type="text" id="editWord" required>
-    <input type="number" id="editCount" required>
-    <button type="submit">Update Button</button>
-    <button type="button" id="cancelEdit">Cancel</button>
-  </form>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
