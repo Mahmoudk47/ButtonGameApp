@@ -1,110 +1,87 @@
-// Get elements
- const buttonPicker = document.getElementById("buttonPicker");
- const createButtonSection = document.getElementById("createButtonSection");
- const editButtonSection = document.getElementById("editButtonSection");
- const cancelEditButton = document.getElementById("cancelEditButton");
- 
- // Show Edit Section and hide Create Section when button is selected
- buttonPicker.addEventListener("change", function() {
-     if (buttonPicker.value !== "default") {
-         createButtonSection.style.display = "none";
-         editButtonSection.style.display = "block";
- document.addEventListener('DOMContentLoaded', () => {
-   const buttonContainer = document.getElementById('buttonContainer');
-   const buttonSelect = document.getElementById('buttonSelect');
-   const totalCountDisplay = document.getElementById('totalCount');
-   const createForm = document.getElementById('createForm');
-   const newWordInput = document.getElementById('newWord');
-   const newCountInput = document.getElementById('newCount');
-   const editForm = document.getElementById('editForm');
-   const editWordInput = document.getElementById('editWord');
-   const editCountInput = document.getElementById('editCount');
-   const cancelEditBtn = document.getElementById('cancelEdit');
- 
-   let buttons = [];
-   let totalCount = 0;
- 
-   // Update total count
-   function updateTotalCount() {
-     totalCountDisplay.textContent = totalCount;
-   }
- 
-   // Render all buttons and populate dropdown
-   function renderButtons() {
-     buttonContainer.innerHTML = '';
-     buttonSelect.innerHTML = '<option value="">Select a button to edit</option>';
- 
-     buttons.forEach((btn, index) => {
-       const button = document.createElement('div');
-       button.className = 'button';
-       button.innerHTML = `
-         <button class="btn btn-primary">
-           ${btn.word} <span class="count">${btn.count}</span>
-         </button>
-       `;
-       buttonContainer.appendChild(button);
- 
-       const option = document.createElement('option');
-       option.value = index;
-       option.textContent = `${btn.word} (${btn.count})`;
-       buttonSelect.appendChild(option);
-     });
- 
-     updateTotalCount();
-   }
- 
-   // Create a new button
-   createForm.addEventListener('submit', (e) => {
-     e.preventDefault();
-     const word = newWordInput.value.trim();
-     const count = parseInt(newCountInput.value.trim(), 10);
- 
-     if (word && !isNaN(count)) {
-       buttons.push({ word, count });
-       totalCount += count;
-       newWordInput.value = '';
-       newCountInput.value = '0';
-       renderButtons();
-     }
- });
-   });
- 
-   // Edit existing button
-   buttonSelect.addEventListener('change', () => {
-     const index = buttonSelect.value;
-     if (index === '') {
-       editForm.style.display = 'none';
-       return;
-     }
- 
-     const btn = buttons[index];
-     editWordInput.value = btn.word;
-     editCountInput.value = btn.count;
-     editForm.style.display = 'block';
- 
-     editForm.onsubmit = (e) => {
-       e.preventDefault();
-       const newWord = editWordInput.value.trim();
-       const newCount = parseInt(editCountInput.value.trim(), 10);
- 
-       if (newWord && !isNaN(newCount)) {
-         totalCount = totalCount - btn.count + newCount;
-         buttons[index] = { word: newWord, count: newCount };
-         renderButtons();
-         editForm.style.display = 'none';
-       }
-     };
-   });
- 
-   // Cancel edit
-   cancelEditBtn.addEventListener('click', () => {
-     editForm.style.display = 'none';
-   });
- 
- // Show Create Section and hide Edit Section when cancel is clicked
- cancelEditButton.addEventListener("click", function() {
-     createButtonSection.style.display = "block";
-     editButtonSection.style.display = "none";
-     buttonPicker.value = "default"; // Reset dropdown
-   renderButtons(); // Initial render
- });
+// Elements
+const totalCountElement = document.getElementById('totalCount');
+const editButtonSelect = document.getElementById('editButtonSelect');
+const buttonWordInput = document.getElementById('buttonWord');
+const buttonCountInput = document.getElementById('buttonCount');
+const createButton = document.getElementById('createButton');
+const buttonContainer = document.getElementById('buttonContainer');
+
+let buttons = [];
+let totalCount = 0;
+
+// Update total count
+function updateTotalCount() {
+    totalCountElement.textContent = totalCount;
+}
+
+// Create a new button
+createButton.addEventListener('click', () => {
+    const word = buttonWordInput.value.trim();
+    const count = parseInt(buttonCountInput.value);
+
+    if (word === '') {
+        alert('Please enter a word.');
+        return;
+    }
+
+    const newButton = {
+        id: Date.now(),
+        word,
+        count,
+    };
+
+    buttons.push(newButton);
+    totalCount += count;
+
+    addButtonToDOM(newButton);
+    updateEditOptions();
+    updateTotalCount();
+
+    buttonWordInput.value = '';
+    buttonCountInput.value = '0';
+});
+
+// Add button to the DOM
+function addButtonToDOM(button) {
+    const buttonElement = document.createElement('div');
+    buttonElement.classList.add('button');
+    buttonElement.setAttribute('data-id', button.id);
+
+    buttonElement.innerHTML = `
+        ${button.word} <span class="count">${button.count}</span>
+    `;
+
+    buttonElement.addEventListener('click', () => incrementCount(button.id));
+    buttonContainer.appendChild(buttonElement);
+}
+
+// Increment count on button click
+function incrementCount(id) {
+    const button = buttons.find(btn => btn.id === id);
+    if (button) {
+        button.count++;
+        totalCount++;
+        updateButtonDisplay(id);
+        updateTotalCount();
+    }
+}
+
+// Update button display after increment
+function updateButtonDisplay(id) {
+    const buttonElement = document.querySelector(`.button[data-id="${id}"] .count`);
+    const button = buttons.find(btn => btn.id === id);
+    if (buttonElement) {
+        buttonElement.textContent = button.count;
+    }
+}
+
+// Update edit options dropdown
+function updateEditOptions() {
+    editButtonSelect.innerHTML = '<option value="">Select a button to edit</option>';
+    buttons.forEach(button => {
+        const option = document.createElement('option');
+        option.value = button.id;
+        option.textContent = button.word;
+        editButtonSelect.appendChild(option);
+    });
+}
