@@ -1,64 +1,99 @@
-// Select elements
-const totalCountEl = document.getElementById('totalCount');
-const buttonTextEl = document.getElementById('buttonText');
-const buttonCountEl = document.getElementById('buttonCount');
-const createButtonEl = document.getElementById('createButton');
-const buttonsContainer = document.getElementById('buttonsContainer');
-const editButtonSelect = document.getElementById('editButtonSelect');
+document.addEventListener('DOMContentLoaded', () => {
+    const totalCountDisplay = document.getElementById('totalCount');
+    const buttonContainer = document.getElementById('buttonContainer');
+    const editButtonSelect = document.getElementById('editButtonSelect');
+    const createButtonForm = document.getElementById('createButtonForm');
+    const editButtonForm = document.getElementById('editButtonForm');
 
-let totalCount = 0;
-let buttons = [];
+    let buttons = [];
+    let totalCount = 0;
+    let selectedButtonIndex = null;
 
-// Update total count display
-function updateTotalCount() {
-    totalCountEl.textContent = totalCount;
-}
-
-// Add button to the DOM
-function addButtonToDOM(button) {
-    const buttonElement = document.createElement('div');
-    buttonElement.className = 'buttonItem';
-    buttonElement.textContent = `${button.text} (${button.count})`;
-    buttonElement.dataset.id = button.id;
-
-    buttonElement.addEventListener('click', () => {
-        button.count++;
-        buttonElement.textContent = `${button.text} (${button.count})`;
-        totalCount++;
-        updateTotalCount();
-    });
-
-    buttonsContainer.appendChild(buttonElement);
-
-    // Add to edit dropdown
-    const option = document.createElement('option');
-    option.value = button.id;
-    option.textContent = button.text;
-    editButtonSelect.appendChild(option);
-}
-
-// Create new button
-createButtonEl.addEventListener('click', () => {
-    const text = buttonTextEl.value.trim();
-    const count = parseInt(buttonCountEl.value);
-
-    if (text === '') {
-        alert('Please enter a word for the button.');
-        return;
+    function updateTotalCount() {
+        totalCount = buttons.reduce((sum, button) => sum + button.count, 0);
+        totalCountDisplay.textContent = totalCount;
     }
 
-    const newButton = {
-        id: Date.now().toString(),
-        text: text,
-        count: count
-    };
+    function renderButtons() {
+        buttonContainer.innerHTML = '';
+        editButtonSelect.innerHTML = '<option>Select a button to edit</option>';
 
-    buttons.push(newButton);
-    totalCount += count;
-    addButtonToDOM(newButton);
-    updateTotalCount();
+        buttons.forEach((button, index) => {
+            // Render main buttons
+            const btn = document.createElement('button');
+            btn.textContent = `${button.word} (${button.count})`;
+            btn.addEventListener('click', () => {
+                button.count++;
+                renderButtons();
+                updateTotalCount();
+            });
+            buttonContainer.appendChild(btn);
 
-    // Clear inputs
-    buttonTextEl.value = '';
-    buttonCountEl.value = '0';
+            // Populate edit dropdown
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `${button.word} (${button.count})`;
+            editButtonSelect.appendChild(option);
+        });
+
+        updateTotalCount();
+    }
+
+    document.getElementById('createButton').addEventListener('click', () => {
+        const word = document.getElementById('newButtonWord').value;
+        const count = parseInt(document.getElementById('newButtonCount').value);
+
+        if (word) {
+            buttons.push({ word, count });
+            renderButtons();
+            document.getElementById('newButtonWord').value = '';
+            document.getElementById('newButtonCount').value = '0';
+        }
+    });
+
+    editButtonSelect.addEventListener('change', () => {
+        const selectedIndex = editButtonSelect.value;
+        if (selectedIndex !== 'Select a button to edit') {
+            selectedButtonIndex = parseInt(selectedIndex);
+            const button = buttons[selectedButtonIndex];
+
+            document.getElementById('editButtonWord').value = button.word;
+            document.getElementById('editButtonCount').value = button.count;
+
+            createButtonForm.style.display = 'none';
+            editButtonForm.style.display = 'block';
+        }
+    });
+
+    document.getElementById('updateButton').addEventListener('click', () => {
+        const word = document.getElementById('editButtonWord').value;
+        const count = parseInt(document.getElementById('editButtonCount').value);
+
+        if (word && selectedButtonIndex !== null) {
+            buttons[selectedButtonIndex].word = word;
+            buttons[selectedButtonIndex].count = count;
+
+            renderButtons();
+            resetForms();
+        }
+    });
+
+    document.getElementById('deleteButton').addEventListener('click', () => {
+        if (selectedButtonIndex !== null) {
+            buttons.splice(selectedButtonIndex, 1);
+            renderButtons();
+            resetForms();
+        }
+    });
+
+    document.getElementById('cancelEditButton').addEventListener('click', resetForms);
+
+    function resetForms() {
+        createButtonForm.style.display = 'block';
+        editButtonForm.style.display = 'none';
+        selectedButtonIndex = null;
+        editButtonSelect.value = 'Select a button to edit';
+    }
+
+    renderButtons();
 });
